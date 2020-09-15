@@ -1,0 +1,34 @@
+<table class="table table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Text of the task</th>
+        <th scope="col">Priority</th>
+        <th scope="col">Time of task's creation</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let todoTask of service.taskList">
+            <td [ngClass]="{completed: todoTask.IsComplete}" (click)="populateForm(todoTask)">{{todoTask.TaskText}}</td>
+            <td [ngClass]="{completed: todoTask.IsComplete}" (click)="populateForm(todoTask)">{{this.service.getPriorites(todoTask.Priority)}}</td>
+            <td [ngClass]="{completed: todoTask.IsComplete}" (click)="populateForm(todoTask)">{{todoTask.TimeOfCreation}} </td>
+            <td><i class="fas fa-trash-alt fa-lg" (click)="onDelete(todoTask.Id)"></i>
+            </td>
+        </tr>
+    </tbody>
+  </table>
+  <hr>
+        <div>
+                <button class="btn btn-dark" (click)="getFiltered('All')"> All </button>
+                <button class="btn btn-dark bt" (click)="getFiltered('Active')"> Active </button>
+                <button class="btn btn-dark bt" (click)="getFiltered('Completed')"> Completed </button>
+        </div>
+  <hr>    
+  <app-pagination
+    (goPage)="goToPage($event)"
+    (goPrevious)="goToPrevious()"
+    (goNext)="goToNext()"
+    [page]="pageNum"
+    [perPage]="limit"
+    [count]="total">
+  </app-pagination>

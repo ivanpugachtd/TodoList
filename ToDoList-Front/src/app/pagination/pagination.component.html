@@ -1,0 +1,19 @@
+<div class="pages">             
+        <button class="btn btn-small btn-dark"
+                (click)="onPrevious()"
+                [disabled]="page === 1 || loading"
+                [ngClass]="{'disabled': page === 1 || loading}">Previous page</button>
+        
+        <button class="btn btn-small btn-dark"
+                        *ngFor="let pageNum of getPages()"
+                        (click)="onPage(pageNum)"
+                        [ngClass]="{'active': pageNum === page, 'disable': loading}">
+                        {{ pageNum }}
+        </button>
+
+        <button class="btn btn-small btn-dark"
+                (click)="onNext()"
+                [disabled]="isLastPage() || loading"
+                [ngClass]="{'disabled': isLastPage() || loading}">Next page</button>
+        <span class="pages-count"> Tasks {{ getMin() }} - {{ getMax() }} of total amount {{ count }} </span>
+</div>
